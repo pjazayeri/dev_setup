@@ -35,21 +35,17 @@ else
   echo "Google Chrome already installed."
 fi
 
-# ── .zshrc symlink ────────────────────────────────────────────────────────────
-SRC="$DOTFILES_DIR/.zshrc"
-DST="$HOME/.zshrc"
+# ── zshrc baseline ────────────────────────────────────────────────────────────
+# Copy baseline to home folder
+cp "$DOTFILES_DIR/zshrc_baseline" "$HOME/.zshrc_baseline"
+echo "Copied zshrc_baseline to ~/.zshrc_baseline"
 
-# Already pointing to the right place — skip
-if [[ -L "$DST" && "$(readlink "$DST")" == "$SRC" ]]; then
-  echo ".zshrc already symlinked."
+# Add source line to ~/.zshrc if not already there
+if ! grep -q 'source ~/.zshrc_baseline' "$HOME/.zshrc" 2>/dev/null; then
+  echo 'source ~/.zshrc_baseline' >> "$HOME/.zshrc"
+  echo "Added 'source ~/.zshrc_baseline' to ~/.zshrc"
 else
-  # Back up any existing file
-  if [[ -e "$DST" || -L "$DST" ]]; then
-    mv "$DST" "${DST}.bak.$(date +%Y%m%d%H%M%S)"
-    echo "Backed up existing .zshrc"
-  fi
-  ln -s "$SRC" "$DST"
-  echo "Symlinked ~/.zshrc -> $SRC"
+  echo "~/.zshrc already sources baseline."
 fi
 
 echo ""
