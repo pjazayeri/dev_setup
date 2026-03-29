@@ -27,6 +27,14 @@ else
   echo "iTerm2 already installed."
 fi
 
+# ── Chrome ────────────────────────────────────────────────────────────────────
+if ! brew list --cask google-chrome &>/dev/null; then
+  echo "Installing Google Chrome..."
+  brew install --cask google-chrome
+else
+  echo "Google Chrome already installed."
+fi
+
 # ── .zshrc symlink ────────────────────────────────────────────────────────────
 SRC="$DOTFILES_DIR/.zshrc"
 DST="$HOME/.zshrc"
