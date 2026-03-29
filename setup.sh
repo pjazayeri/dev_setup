@@ -20,7 +20,7 @@ else
 fi
 
 # ── iTerm2 ────────────────────────────────────────────────────────────────────
-if ! brew list --cask iterm2 &>/dev/null; then
+if [[ ! -d "/Applications/iTerm.app" ]]; then
   echo "Installing iTerm2..."
   brew install --cask iterm2
 else
@@ -28,7 +28,7 @@ else
 fi
 
 # ── Chrome ────────────────────────────────────────────────────────────────────
-if ! brew list --cask google-chrome &>/dev/null; then
+if [[ ! -d "/Applications/Google Chrome.app" ]]; then
   echo "Installing Google Chrome..."
   brew install --cask google-chrome
 else
